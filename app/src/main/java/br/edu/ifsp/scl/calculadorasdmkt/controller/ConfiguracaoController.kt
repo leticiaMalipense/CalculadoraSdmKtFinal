@@ -2,7 +2,7 @@ package br.edu.ifsp.scl.calculadorasdmkt.controller
 
 import ConfiguracaoService
 import br.edu.ifsp.scl.calculadorasdmkt.model.Configuracao
-import br.edu.ifsp.scl.calculadorasdmkt.model.ConfiguracaoGeral
+import br.edu.ifsp.scl.calculadorasdmkt.model.ConfiguracaoBase
 import br.edu.ifsp.scl.calculadorasdmkt.view.ConfiguracaoActivity
 
 class ConfiguracaoController(val view: ConfiguracaoActivity) {
@@ -17,15 +17,15 @@ class ConfiguracaoController(val view: ConfiguracaoActivity) {
         view.atualizaViewConfiguracao(configuracao)
     }
 
-    fun salvaConfiguracaoGeral(configuracaoGeral: ConfiguracaoGeral) {
-        model.setConfiguracaoGeral(configuracaoGeral)
-        view.atualizaViewConfiguracaoGeral(configuracaoGeral)
+    fun salvaConfiguracaoBase(configuracaoBase: ConfiguracaoBase) {
+        model.setConfiguracaoBase(configuracaoBase)
+        view.atualizaViewConfiguracaoBase(configuracaoBase)
     }
 
     fun buscaConfiguracao() {
         val configuracao = model.getConfiguracao()
-        val configuracaoGeral = model.getConfiguracaoGeral()
+        val configuracaoGeral = model.getConfiguracaoBase()
         view.atualizaViewConfiguracao(configuracao)
-        view.atualizaViewConfiguracaoGeral(configuracaoGeral)
+        view.atualizaViewConfiguracaoBase(configuracaoGeral)
     }
 }

@@ -2,31 +2,31 @@ import android.content.Context
 import android.content.SharedPreferences
 import br.edu.ifsp.scl.calculadorasdmkt.model.Configuracao
 import br.edu.ifsp.scl.calculadorasdmkt.data.ConfiguracaoDao
-import br.edu.ifsp.scl.calculadorasdmkt.model.ConfiguracaoGeral
-import br.edu.ifsp.scl.calculadorasdmkt.data.ConfiguracaoGeralDao
+import br.edu.ifsp.scl.calculadorasdmkt.data.ConfiguracaoBaseDao
+import br.edu.ifsp.scl.calculadorasdmkt.model.ConfiguracaoBase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.json.JSONObject
 
 class ConfiguracaoSharedPreferences(context: Context): ConfiguracaoDao,
-    ConfiguracaoGeralDao {
+    ConfiguracaoBaseDao {
 
     // Constantes
     companion object{
         val TAG_CONFIGURACAO = "configuracoes"
-        val TAG_CONFIGURACAO_GERAL = "configuracoes_gerais"
+        val TAG_CONFIGURACAO_BASE = "configuracao_base"
 
         val NOME_ARQUIVO = "configuracoes"
-        val NOME_ARQUIVO_GERAL = "configuracoes_gerais"
+        val NOME_ARQUIVO_BASE = "configuracao_base"
         val MODO_ARQUIVO = Context.MODE_PRIVATE
     }
     val sharedPreferences: SharedPreferences
-    val sharedPreferencesGeral: SharedPreferences
+    val sharedPreferencesBase: SharedPreferences
     val gson: Gson
     init{
         sharedPreferences = context.getSharedPreferences(NOME_ARQUIVO,
             MODO_ARQUIVO)
-        sharedPreferencesGeral = context.getSharedPreferences(NOME_ARQUIVO_GERAL,
+        sharedPreferencesBase = context.getSharedPreferences(NOME_ARQUIVO_BASE,
             MODO_ARQUIVO)
         gson = GsonBuilder().create()
     }
@@ -41,16 +41,6 @@ class ConfiguracaoSharedPreferences(context: Context): ConfiguracaoDao,
 
     }
 
-    override fun createOrUpdateConfiguracaoGeral(configuracao: ConfiguracaoGeral) {
-        val configuracaoJson = JSONObject(gson.toJson(configuracao))
-
-        val spEditor: SharedPreferences.Editor = sharedPreferencesGeral.edit()
-
-        spEditor.putString(TAG_CONFIGURACAO_GERAL, configuracaoJson.toString())
-        spEditor.commit()
-
-    }
-
     override fun readConfiguracao(): Configuracao {
         val configuracaoString = sharedPreferences.getString(TAG_CONFIGURACAO, "")
         return if (configuracaoString != "")
@@ -60,12 +50,22 @@ class ConfiguracaoSharedPreferences(context: Context): ConfiguracaoDao,
             Configuracao()
     }
 
-    override fun readConfiguracaoGeral(): ConfiguracaoGeral {
-        val configuracaoString = sharedPreferencesGeral.getString(TAG_CONFIGURACAO_GERAL, "")
+    override fun createOrUpdateConfiguracaoBase(configuracao: ConfiguracaoBase) {
+        val configuracaoJson = JSONObject(gson.toJson(configuracao))
+
+        val spEditor: SharedPreferences.Editor = sharedPreferencesBase.edit()
+
+        spEditor.putString(TAG_CONFIGURACAO_BASE, configuracaoJson.toString())
+        spEditor.commit()
+
+    }
+
+    override fun readConfiguracaoBase(): ConfiguracaoBase {
+        val configuracaoString = sharedPreferencesBase.getString(TAG_CONFIGURACAO_BASE, "")
         return if (configuracaoString != "")
 
-            gson.fromJson(configuracaoString, ConfiguracaoGeral::class.java)
+            gson.fromJson(configuracaoString, ConfiguracaoBase::class.java)
         else
-            ConfiguracaoGeral()
+            ConfiguracaoBase()
     }
 }

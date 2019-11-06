@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,6 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <include layout="@layout/toolbar" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -23,16 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tipo de leiaute" />
+
         <Spinner
             android:id="@+id/leiauteSpn"
             android:layout_width="wrap_content"
@@ -47,75 +48,107 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Separador" />
+
         <RadioGroup
             android:id="@+id/separadorRg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+
             <RadioButton
                 android:id="@+id/pontoRb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ponto" />
+
             <RadioButton
                 android:id="@+id/virgulaRb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Vírgula" />
         </RadioGroup>
-    </LinearLayout>
 
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/salvarBtn"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <Button
+            android:id="@+id/salvarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickSalvaConfiguracao"
+            android:text="Salvar" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
         <TextView
-            android:id="@+id/txtBaseDadps"
+            android:id="@+id/txtBaseDados"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/escolha" />
+            android:text="@string/escolha"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="281dp" />
+
         <RadioGroup
             android:id="@+id/radio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-            <RadioButton
-                android:id="@+id/radioBanco"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Banco de Dados" />
-            <RadioButton
-                android:id="@+id/radioPreferencias"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Preferencias do Usuario" />
+
+        <RadioButton
+            android:id="@+id/radioBanco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Banco de Dados"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="281dp" />
+
+        <RadioButton
+            android:id="@+id/radioPreferencias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Preferencias do Usuario"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="313dp" />
+
         </RadioGroup>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/salvarBtn"
+    <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Salvar"
-        android:onClick="onClickSalvaConfiguracao"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <Button
+            android:id="@+id/salvarBaseBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickSalvaConfiguracaoBase"
+            android:text="Salvar forma de armazenamento" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

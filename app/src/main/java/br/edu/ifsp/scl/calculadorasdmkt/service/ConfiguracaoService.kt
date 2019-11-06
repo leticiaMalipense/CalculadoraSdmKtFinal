@@ -1,17 +1,17 @@
 import android.content.Context
 import br.edu.ifsp.scl.calculadorasdmkt.data.ConfiguracaoDao
-import br.edu.ifsp.scl.calculadorasdmkt.data.ConfiguracaoGeralDao
+import br.edu.ifsp.scl.calculadorasdmkt.data.ConfiguracaoBaseDao
 import br.edu.ifsp.scl.calculadorasdmkt.data.ConfiguracaoSqlite
 import br.edu.ifsp.scl.calculadorasdmkt.model.*
 
 class ConfiguracaoService(context: Context) {
     var context: Context
     var configuracaoDao: ConfiguracaoDao
-    var configuracaoGeralDao: ConfiguracaoGeralDao
+    var configuracaoBaseDao: ConfiguracaoBaseDao
 
     init{
         this.context = context
-        this.configuracaoGeralDao = ConfiguracaoSharedPreferences(context)
+        this.configuracaoBaseDao = ConfiguracaoSharedPreferences(context)
 
         // Inicializando conforme a fonte de dados utilizada
         this.configuracaoDao = getInstanceConfiguracao(context)
@@ -28,17 +28,6 @@ class ConfiguracaoService(context: Context) {
         configuracaoDao.createOrUpdateConfiguracao(configuracao)
     }
 
-    fun setConfiguracaoGeral(configuracaoGeral: ConfiguracaoGeral) {
-        /* Qualquer tratamento necessário aos dados antes de salvá-los
-        na fonte de dados escolhida deve ser feita no Service.
-        As classes que implementam o DAO devem esconder as peculiaridades
-        para acesso a cada fonte de dados diferente e executar apenas as funções
-        de CRUD.*/
-        // Tratamento de dados aqui!
-        // Delegando ao modelo
-        configuracaoGeralDao.createOrUpdateConfiguracaoGeral(configuracaoGeral)
-    }
-
     fun getConfiguracao(): Configuracao {
         // Tratamento de dados aqui!
         // Delegando ao modelo
@@ -46,10 +35,22 @@ class ConfiguracaoService(context: Context) {
         return configuracaoDao.readConfiguracao()
     }
 
-    fun getConfiguracaoGeral(): ConfiguracaoGeral {
+    fun setConfiguracaoBase(configuracaoBase: ConfiguracaoBase) {
+        /* Qualquer tratamento necessário aos dados antes de salvá-los
+        na fonte de dados escolhida deve ser feita no Service.
+        As classes que implementam o DAO devem esconder as peculiaridades
+        para acesso a cada fonte de dados diferente e executar apenas as funções
+        de CRUD.*/
         // Tratamento de dados aqui!
         // Delegando ao modelo
-        return configuracaoGeralDao.readConfiguracaoGeral()
+        configuracaoBaseDao.createOrUpdateConfiguracaoBase(configuracaoBase)
+    }
+
+
+    fun getConfiguracaoBase(): ConfiguracaoBase {
+        // Tratamento de dados aqui!
+        // Delegando ao modelo
+        return configuracaoBaseDao.readConfiguracaoBase()
     }
 
     fun getInstanceConfiguracao(context: Context): ConfiguracaoDao {
@@ -61,8 +62,8 @@ class ConfiguracaoService(context: Context) {
     }
 
     fun isConfiguracaoNoBanco(): Boolean {
-      val configuracaoGeral = configuracaoGeralDao.readConfiguracaoGeral()
-        if(configuracaoGeral.baseDeConfiguracao.equals(BaseDeConfiguracao.BANCO)){
+      val configuracaoBase = configuracaoBaseDao.readConfiguracaoBase()
+        if(configuracaoBase.baseDeConfiguracao.equals(BaseDeConfiguracao.BANCO)){
             return true
         }
         return false
