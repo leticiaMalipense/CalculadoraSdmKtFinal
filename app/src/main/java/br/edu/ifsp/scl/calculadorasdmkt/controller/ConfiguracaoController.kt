@@ -24,8 +24,8 @@ class ConfiguracaoController(val view: ConfiguracaoActivity) {
 
     fun buscaConfiguracao() {
         val configuracao = model.getConfiguracao()
-        val configuracaoGeral = model.getConfiguracaoBase()
+        val configuracaoBase = model.getConfiguracaoBase()
         view.atualizaViewConfiguracao(configuracao)
-        view.atualizaViewConfiguracaoBase(configuracaoGeral)
+        view.atualizaViewConfiguracaoBase(configuracaoBase)
     }
 }
