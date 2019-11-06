@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Calculadora Sdm Kt</string>
+    <string name="escolha">Escolha onde serão salvo as configurações</string>
+    <string-array name="tipo_leiaute">
+        <item>Básico</item>
+        <item>Avançado</item>
+    </string-array>
+</resources>
